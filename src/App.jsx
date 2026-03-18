@@ -6,6 +6,7 @@ const App = () => {
     <div className="cj-root">
       <Navbar />
       <LandingPage />
+      <footer></footer>
     </div>
   );
 };
