@@ -1,12 +1,11 @@
-import React from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import LandingPage from "./pages/LandingPage";
 
 const App = () => {
   return (
     <div className="cj-root">
       <Navbar />
-      <Hero />
+      <LandingPage />
     </div>
   );
 };
