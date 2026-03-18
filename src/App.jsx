@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 
@@ -6,7 +7,7 @@ const App = () => {
     <div className="cj-root">
       <Navbar />
       <LandingPage />
-      <footer></footer>
+      <Footer />
     </div>
   );
 };

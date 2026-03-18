@@ -3828,3 +3828,102 @@ textarea.freetext:focus {
 .toggle.on::after {
   left: 18px;
 }
+
+.cj-footer {
+  border-top: 0.5px solid var(--color-border-tertiary);
+  margin-top: 5rem;
+  padding: 2.5rem 1.25rem;
+  font-family: "DM Sans", sans-serif;
+  color: var(--color-text-secondary);
+}
+
+.cj-footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.cj-footer-logo {
+  font-family: "DM Serif Display", serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  color: var(--color-text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.cj-footer-logo span {
+  color: #ba7517;
+}
+
+.cj-footer-tagline {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 220px;
+}
+
+.cj-footer-col h4 {
+  font-size: 11px;
+  font-family: "DM Mono", monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 0.85rem;
+  font-weight: 400;
+}
+
+.cj-footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cj-footer-col ul li a {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.cj-footer-col ul li a:hover {
+  color: var(--color-text-primary);
+}
+
+.cj-footer-bottom {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--color-border-tertiary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  font-family: "DM Mono", monospace;
+  color: var(--color-text-tertiary);
+}
+
+.cj-footer-bottom a {
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+}
+.cj-footer-bottom a:hover {
+  color: var(--color-text-secondary);
+}
+.cj-footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 700px) {
+  .cj-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cj-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
