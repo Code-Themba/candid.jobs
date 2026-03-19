@@ -947,10 +947,12 @@ body {
 }
 
 .os-card {
+  position: relative;
   background: var(--color-background-primary);
   border: 0.5px solid var(--color-border-tertiary);
   border-radius: var(--border-radius-lg);
   padding: 1.1rem;
+  height: 250px;
 }
 .os-num {
   font-family: "DM Mono", monospace;
@@ -980,10 +982,18 @@ body {
 .os-required {
   background: #faeeda;
   color: #854f0b;
+  margin-left: 10px;
 }
 .os-auto {
   background: #e1f5ee;
   color: #0f6e56;
+}
+.os-auto,
+.os-required {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 10px;
 }
 
 .contract-box {
