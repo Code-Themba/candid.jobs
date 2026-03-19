@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ThemeToggle } from "../context/ThemeContext";
 const Navbar = () => {
   return (
     <nav className="nav">
@@ -11,7 +11,10 @@ const Navbar = () => {
         <li>For Employers</li>
         <li>Accountability</li>
       </ul>
-      <button className="btn-nav">Post a job</button>
+      <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        <ThemeToggle />
+        <button className="btn-nav">Post a job</button>
+      </div>
     </nav>
   );
 };

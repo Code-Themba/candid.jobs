@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap");
 /*
  * candid-jobs.css
  * Faithful extraction of all <style> blocks from every Candid.jobs screen.
@@ -53,52 +54,274 @@
 }
 
 /* ============================================================
-   DARK MODE OVERRIDES
-   Applied automatically when the OS/browser is in dark mode.
-   All amber, teal, blue, red hardcoded hex values in the file
-   are designed to remain readable on dark backgrounds as-is.
+   THEMING — AUTO + MANUAL OVERRIDE
+   Three-layer approach:
+     1. :root defines light mode as the default baseline.
+     2. @media (prefers-color-scheme: dark) auto-switches when
+        no manual preference has been set by the user.
+     3. [data-theme="dark"] and [data-theme="light"] on <html>
+        override the media query — set by candid-jobs.js toggle.
+   Priority: data-theme attribute > media query > :root default.
    ============================================================ */
 
-@media (prefers-color-scheme: light) {
+/* Auto dark: follows device/browser preference */
+@media (prefers-color-scheme: dark) {
   :root {
-    /* Backgrounds */
     --color-background-primary: #1c1c1e;
-    /* Cards and raised surfaces become a dark near-black */
-
     --color-background-secondary: #2c2c2e;
-    /* Page surfaces, stat cards, filled containers */
-
-    /* Text */
     --color-text-primary: #f2f2f7;
-    /* Near-white for headings and body copy */
-
     --color-text-secondary: #aeaeb2;
-    /* Muted but readable on dark bg */
-
     --color-text-tertiary: #6c6c70;
-    /* Faint hints, timestamps */
-
-    /* Borders — lightened for visibility on dark surfaces */
     --color-border-primary: rgba(255, 255, 255, 0.4);
     --color-border-secondary: rgba(255, 255, 255, 0.22);
     --color-border-tertiary: rgba(255, 255, 255, 0.1);
-
-    /* Border radius — unchanged */
-    --border-radius-md: 8px;
-    --border-radius-lg: 12px;
   }
+}
+
+/* Forced light: overrides dark media query */
+[data-theme="light"] {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f4f0;
+  --color-text-primary: #18181a;
+  --color-text-secondary: #6b6b6e;
+  --color-text-tertiary: #a0a0a3;
+  --color-border-primary: rgba(24, 24, 26, 0.4);
+  --color-border-secondary: rgba(24, 24, 26, 0.3);
+  --color-border-tertiary: rgba(24, 24, 26, 0.12);
+}
+
+/* Forced dark: overrides light media query */
+[data-theme="dark"] {
+  --color-background-primary: #1c1c1e;
+  --color-background-secondary: #2c2c2e;
+  --color-text-primary: #f2f2f7;
+  --color-text-secondary: #aeaeb2;
+  --color-text-tertiary: #6c6c70;
+  --color-border-primary: rgba(255, 255, 255, 0.4);
+  --color-border-secondary: rgba(255, 255, 255, 0.22);
+  --color-border-tertiary: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+   .cj-theme-toggle injected by candid-jobs.js into the nav.
+   ============================================================ */
+
+.cj-theme-toggle {
+  background: transparent;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+  user-select: none;
+  width: 80px;
+  min-width: 80px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cj-theme-toggle:hover {
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+.cj-theme-toggle-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* ============================================================
+   FOOTER
+   Injected by candid-jobs.js. Sits at the bottom of every page.
+   ============================================================ */
+
+.cj-footer {
+  border-top: 0.5px solid var(--color-border-tertiary);
+  margin-top: 5rem;
+  padding: 2.5rem 1.25rem;
+  font-family: "DM Sans", sans-serif;
+  color: var(--color-text-secondary);
+}
+
+.cj-footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.cj-footer-logo {
+  font-family: "DM Serif Display", serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  color: var(--color-text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.cj-footer-logo span {
+  color: #ba7517;
+}
+
+.cj-footer-tagline {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 220px;
+}
+
+.cj-footer-col h4 {
+  font-size: 11px;
+  font-family: "DM Mono", monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 0.85rem;
+  font-weight: 400;
+}
+
+.cj-footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cj-footer-col ul li a {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.cj-footer-col ul li a:hover {
+  color: var(--color-text-primary);
+}
+
+.cj-footer-bottom {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--color-border-tertiary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  font-family: "DM Mono", monospace;
+  color: var(--color-text-tertiary);
+}
+
+.cj-footer-bottom a {
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+}
+.cj-footer-bottom a:hover {
+  color: var(--color-text-secondary);
+}
+.cj-footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 700px) {
+  .cj-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cj-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ============================================================
+   TOAST NOTIFICATION
+   Used by candid-jobs.js sendPrompt() replacement.
+   ============================================================ */
+
+.cj-toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.cj-toast {
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: var(--border-radius-md);
+  max-width: 320px;
+  line-height: 1.5;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.cj-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ============================================================
    SHARED — appears in every screen
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap");
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* ── Base document styles ────────────────────────────────────
+   These consume the CSS variables so background and text
+   actually repaint when data-theme changes on <html>.
+   The transition gives the toggle a smooth crossfade.
+─────────────────────────────────────────────────────────── */
+
+html {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+body {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  font-family: "DM Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* React mounts into #root — make sure it fills and inherits */
+#root {
+  background-color: var(--color-background-primary);
+  min-height: 100vh;
+  transition: background-color 0.25s ease;
 }
 
 /* ============================================================
@@ -3827,103 +4050,4 @@ textarea.freetext:focus {
 }
 .toggle.on::after {
   left: 18px;
-}
-
-.cj-footer {
-  border-top: 0.5px solid var(--color-border-tertiary);
-  margin-top: 5rem;
-  padding: 2.5rem 1.25rem;
-  font-family: "DM Sans", sans-serif;
-  color: var(--color-text-secondary);
-}
-
-.cj-footer-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 2rem;
-}
-
-.cj-footer-logo {
-  font-family: "DM Serif Display", serif;
-  font-size: 20px;
-  letter-spacing: -0.5px;
-  color: var(--color-text-primary);
-  margin-bottom: 0.6rem;
-}
-
-.cj-footer-logo span {
-  color: #ba7517;
-}
-
-.cj-footer-tagline {
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  max-width: 220px;
-}
-
-.cj-footer-col h4 {
-  font-size: 11px;
-  font-family: "DM Mono", monospace;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-  margin-bottom: 0.85rem;
-  font-weight: 400;
-}
-
-.cj-footer-col ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cj-footer-col ul li a {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
-.cj-footer-col ul li a:hover {
-  color: var(--color-text-primary);
-}
-
-.cj-footer-bottom {
-  max-width: 900px;
-  margin: 2rem auto 0;
-  padding-top: 1.5rem;
-  border-top: 0.5px solid var(--color-border-tertiary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 11px;
-  font-family: "DM Mono", monospace;
-  color: var(--color-text-tertiary);
-}
-
-.cj-footer-bottom a {
-  color: var(--color-text-tertiary);
-  text-decoration: none;
-}
-.cj-footer-bottom a:hover {
-  color: var(--color-text-secondary);
-}
-.cj-footer-links {
-  display: flex;
-  gap: 16px;
-}
-
-@media (max-width: 700px) {
-  .cj-footer-inner {
-    grid-template-columns: 1fr 1fr;
-  }
-  .cj-footer-brand {
-    grid-column: 1 / -1;
-  }
 }
