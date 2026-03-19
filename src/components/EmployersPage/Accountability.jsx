@@ -355,8 +355,8 @@ const DashboardSection = ({ onRespondNow }) => {
               Your rejection for Aisha M. on the Backend Engineer role was
               returned. Revise before it escalates.
             </div>
-            <button className="aq-action">Revise feedback →</button>
           </div>
+          <button className="aq-action">Revise feedback →</button>
         </div>
         <div className="aq-item">
           <div className="aq-urgency urg-low"></div>
