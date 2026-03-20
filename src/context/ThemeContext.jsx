@@ -80,7 +80,7 @@ export const ThemeToggle = ({ className = "", style }) => {
       <span className="cj-theme-toggle-icon" aria-hidden="true">
         {isDark ? "☀" : "☾"}
       </span>
-      <span className="cj-theme-toggle-icon">{isDark ? "Light" : "Dark"}</span>
+      <span className="cj-theme-toggle-label">{isDark ? "Light" : "Dark"}</span>
     </button>
   );
 };

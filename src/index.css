@@ -60,7 +60,7 @@
      2. @media (prefers-color-scheme: dark) auto-switches when
         no manual preference has been set by the user.
      3. [data-theme="dark"] and [data-theme="light"] on <html>
-        override the media query — set by candid-jobs.js toggle.
+        override the media query — set by ThemeContext.jsx toggle.
    Priority: data-theme attribute > media query > :root default.
    ============================================================ */
 
@@ -104,7 +104,7 @@
 
 /* ============================================================
    THEME TOGGLE BUTTON
-   .cj-theme-toggle injected by candid-jobs.js into the nav.
+   .cj-theme-toggle used by ThemeContext.jsx ThemeToggle component.
    ============================================================ */
 
 .cj-theme-toggle {
@@ -115,6 +115,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-family: "DM Mono", monospace;
   font-size: 11px;
@@ -124,6 +125,8 @@
     border-color 0.15s,
     color 0.15s;
   user-select: none;
+  /* Fixed width prevents the nav from shifting when the
+     label switches between "Dark" and "Light" */
   width: 80px;
   min-width: 80px;
   overflow: hidden;
@@ -135,14 +138,26 @@
   color: var(--color-text-primary);
 }
 
+/* Fixed width so ☾ and ☀ take up identical space */
 .cj-theme-toggle-icon {
+  display: inline-block;
+  width: 14px;
+  text-align: center;
   font-size: 13px;
   line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Fixed width wide enough for both "Dark" and "Light" */
+.cj-theme-toggle-label {
+  display: inline-block;
+  width: 30px;
+  text-align: left;
 }
 
 /* ============================================================
    FOOTER
-   Injected by candid-jobs.js. Sits at the bottom of every page.
+   Rendered by Footer.jsx component.
    ============================================================ */
 
 .cj-footer {
@@ -245,45 +260,9 @@
 }
 
 /* ============================================================
-   TOAST NOTIFICATION
-   Used by candid-jobs.js sendPrompt() replacement.
-   ============================================================ */
-
-.cj-toast-container {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.cj-toast {
-  background: var(--color-text-primary);
-  color: var(--color-background-primary);
-  font-family: "DM Sans", sans-serif;
-  font-size: 13px;
-  padding: 10px 16px;
-  border-radius: var(--border-radius-md);
-  max-width: 320px;
-  line-height: 1.5;
-  pointer-events: auto;
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.2s,
-    transform 0.2s;
-}
-
-.cj-toast.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================================
-   SHARED — appears in every screen
+   BASE DOCUMENT STYLES
+   These consume the CSS variables so background and text
+   actually repaint when data-theme changes on <html>.
    ============================================================ */
 
 * {
@@ -291,12 +270,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* ── Base document styles ────────────────────────────────────
-   These consume the CSS variables so background and text
-   actually repaint when data-theme changes on <html>.
-   The transition gives the toggle a smooth crossfade.
-─────────────────────────────────────────────────────────── */
 
 html {
   background-color: var(--color-background-primary);
@@ -566,6 +539,21 @@ body {
   font-weight: 400;
 }
 
+/* filter-bar is the seeker dashboard variant — flex row with a
+   spacer that pushes the sort select to the far right */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Stretches to fill remaining space, pushing sort select right */
+.filter-sep {
+  flex: 1;
+}
+
 .filter-row {
   display: flex;
   gap: 8px;
@@ -588,6 +576,33 @@ body {
   background: var(--color-text-primary);
   color: var(--color-background-primary);
   border-color: var(--color-text-primary);
+}
+
+.sort-select {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  background: var(--color-background-primary);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6B6E' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.sort-select:hover {
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+.sort-select:focus {
+  border-color: var(--color-border-primary);
 }
 
 .job-card {
@@ -932,6 +947,9 @@ body {
   font-weight: 500;
 }
 
+/* NOTE: .section and .section.active are kept for any remaining
+   vanilla HTML usage but are NOT used in React components.
+   React uses conditional rendering (SECTIONS map) instead. */
 .section {
   display: none;
 }
@@ -2188,16 +2206,6 @@ body {
   color: var(--color-background-primary);
 }
 
-.sort-select {
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  padding: 5px 10px;
-  border: 0.5px solid var(--color-border-secondary);
-  border-radius: var(--border-radius-md);
-  background: var(--color-background-primary);
-  color: var(--color-text-secondary);
-}
-
 .app-card {
   background: var(--color-background-primary);
   border: 0.5px solid var(--color-border-tertiary);
@@ -3431,19 +3439,6 @@ textarea.freetext:focus {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.ac-logo {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--border-radius-md);
-  background: var(--color-background-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "DM Mono", monospace;
-  font-size: 9px;
-  color: var(--color-text-secondary);
-  flex-shrink: 0;
 }
 .ac-info {
   flex: 1;
