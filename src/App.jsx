@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import AccountabilityPage from "./pages/AccountabilityPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ApplicationDashboard from "./components/Seeker/ApplicationDashboard";
+import OnBoarding from "./components/Seeker/OnBoarding";
 const App = () => {
   return (
     <Routes>
@@ -16,6 +17,7 @@ const App = () => {
           element={<AccountabilityPage />}
         />
         <Route path="seekers/dashboard" element={<ApplicationDashboard />} />
+        <Route path="seekers/onboarding" element={<OnBoarding />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
