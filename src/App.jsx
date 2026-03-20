@@ -5,8 +5,9 @@ import Layout from "./Layout";
 import LandingPage from "./pages/LandingPage";
 import AccountabilityPage from "./pages/AccountabilityPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import ApplicationDashboard from "./components/Seeker/ApplicationDashboard";
-import OnBoarding from "./components/Seeker/OnBoarding";
+import OnBoardingFlowPage from "./pages/OnBoardingFlowPage";
+import ApplicationDashboardPage from "./pages/ApplicationDashboardPage";
+import BulkResponsePage from "./pages/BulkResponsePage";
 const App = () => {
   return (
     <Routes>
@@ -16,8 +17,12 @@ const App = () => {
           path="employers/accountability"
           element={<AccountabilityPage />}
         />
-        <Route path="seekers/dashboard" element={<ApplicationDashboard />} />
-        <Route path="seekers/onboarding" element={<OnBoarding />} />
+        <Route
+          path="seekers/dashboard"
+          element={<ApplicationDashboardPage />}
+        />
+        <Route path="seekers/onboarding" element={<OnBoardingFlowPage />} />
+        <Route path="employers/response" element={<BulkResponsePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
